@@ -1,3 +1,5 @@
+PROJECT
+POST
 {
   "name": "Sistema de Gestión de Inventario",
   "description": "Este proyecto se centra en el desarrollo de un sistema integral de gestión de inventario para una cadena de tiendas minoristas. El objetivo es mejorar la eficiencia en la gestión de stock, pedidos y logística.",
@@ -10,8 +12,7 @@
   ]
 }
 
-
-
+PUT
 {
   "name": "Nuevo Nombre del Proyecto",
   "description": "Nueva Descripción del Proyecto",
@@ -19,7 +20,8 @@
 }
 
 
-
+TESTCASE
+POST
 {
   "title": "Prueba de ejemplo",
   "description": "Esta es una prueba de ejemplo",
@@ -41,4 +43,33 @@
   ]
 }
 
+ERROR
+
+POST
+{
+  "description": "Este es un ejemplo de error",
+  "severity": "High",
+  "status": "New",
+  "testCase": "655eb34d418cc82a08e3faf4",
+  "reportedBy": "65583b0e40b0f5111a18dcae",
+  "assignedTo": "65583b0e40b0f5111a18dcae",
+  "comments": [
+    {
+      "text": "Este es un comentario de ejemplo",
+      "createdBy": "65583b0e40b0f5111a18dcae"
+    }
+  ]
+}
+PUT
+{
+  "description": "Este es un ejemplo de error con el put",
+
+  "status": "In Progress",
+  "comments": [
+    {
+      "text": "Este es un comentario de ejemplo con el put",
+      "createdBy": "65583b0e40b0f5111a18dcae"
+    }
+  ]
+}
 
