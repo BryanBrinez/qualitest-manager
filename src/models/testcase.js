@@ -14,7 +14,7 @@ const TestCaseSchema = new Schema(
       type: String,
       required: [true, "Test steps are required"],
     },
-    
+
     expectedResult: {
       type: String,
       required: [true, "Expected result is required"],
@@ -42,10 +42,12 @@ const TestCaseSchema = new Schema(
       enum: ["Baja", "Media", "Alta"],
       required: [true, "Priority is required"],
     },
-    evidence: [{
-        type: String, // URL o referencia al archivo
+    evidence: [
+      {
+        url: String,
         description: String,
-      }],
+      },
+    ],
     deadline: {
       type: Date,
     },

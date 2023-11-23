@@ -1,0 +1,44 @@
+{
+  "name": "Sistema de Gestión de Inventario",
+  "description": "Este proyecto se centra en el desarrollo de un sistema integral de gestión de inventario para una cadena de tiendas minoristas. El objetivo es mejorar la eficiencia en la gestión de stock, pedidos y logística.",
+  "startDate": "2023-12-01",
+  "endDate": "2024-06-30",
+  "teamMembers": [
+    { "user": "62b8f83e9c28a67e8b8a7e53", "role": "Desarrollador" },
+    { "user": "62b8f8409c28a67e8b8a7e54", "role": "Analista de Pruebas" },
+    { "user": "62b8f8429c28a67e8b8a7e55", "role": "Gerente de Proyecto" }
+  ]
+}
+
+
+
+{
+  "name": "Nuevo Nombre del Proyecto",
+  "description": "Nueva Descripción del Proyecto",
+  "endDate": "2023-12-31"
+}
+
+
+
+{
+  "title": "Prueba de ejemplo",
+  "description": "Esta es una prueba de ejemplo",
+  "steps": "Paso 1, Paso 2, Paso 3",
+  "expectedResult": "El resultado esperado de la prueba",
+  "status": "Pending",
+  "result": "Failed",
+  "project": "655eb34d418cc82a08e3faf4",
+  "createdBy": "65583b0e40b0f5111a18dcae",
+  "assignedTo": "65583b0e40b0f5111a18dcae",
+  "stage": "Desarrollo",
+  "priority": "Alta",
+  "deadline": "2023-12-31T23:59:59.999Z",
+  "evidence": [
+    {
+      "url" : "URL",
+      "description": "description"
+    }
+  ]
+}
+
+
