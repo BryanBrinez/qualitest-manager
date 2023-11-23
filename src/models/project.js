@@ -23,9 +23,9 @@ const ProjectSchema = new Schema(
       user: { type: Schema.Types.ObjectId, ref: 'User' },
       role: { type: String, required: true }
     }],
-    tasks: [{
+    test: [{
         type: Schema.Types.ObjectId,
-        ref: 'Task'
+        ref: 'TestCase'
       }],
     // Otros campos según sea necesario
   },

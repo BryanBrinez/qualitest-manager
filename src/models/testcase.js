@@ -14,7 +14,7 @@ const TestCaseSchema = new Schema(
       type: String,
       required: [true, "Test steps are required"],
     },
-    testData: String,
+    
     expectedResult: {
       type: String,
       required: [true, "Expected result is required"],
