@@ -8,6 +8,9 @@ import { usePathname} from "next/navigation";
 export default function SideBar() {
   const { data } = useSession();
   const pathname = usePathname()
+  console.log(pathname)
+
+  const isPathActive = (path) => pathname.startsWith(path);
 
   const [isMenu1Visible, setIsMenu1Visible] = useState(false);
 
@@ -42,33 +45,33 @@ export default function SideBar() {
           <Link
             href={"/dashboard/proyectos"}
             onClick={() => toggleMenu1()}
-            className={`focus:outline-none text-left  text-white flex justify-between items-center w-full py-5 space-x-14 ${
-                pathname === "/dashboard/proyectos" ? "text-indigo-400" : "active"
-              }`}
+            className={"focus:outline-none text-left  text-white flex justify-between items-center w-full py-5 space-x-14 "}
           >
-            <p className="text-sm leading-5  uppercase">Proyectos</p>
+            <p className={`text-sm leading-5 uppercase ${
+                isPathActive("/dashboard/proyectos") ? "text-indigo-400" : "active"
+              }`}>Proyectos</p>
           </Link>
         </div>
         <div className="flex flex-col justify-start items-center   px-6 border-b border-gray-600 w-full  ">
           <Link
             href={"/dashboard/pruebas"}
             
-            className={`focus:outline-none text-left  text-white flex justify-between items-center w-full py-5 space-x-14 ${
-                pathname === "/dashboard/pruebas" ? "text-indigo-400" : "active"
-              }`}
+            className={"focus:outline-none text-left  text-white flex justify-between items-center w-full py-5 space-x-14 }"}
           >
-            <p className="text-sm leading-5 uppercase">Pruebas</p>
+            <p className={`text-sm leading-5 uppercase ${
+                isPathActive("/dashboard/pruebas") ? "text-indigo-400" : "active"
+              }`}>Pruebas</p>
           </Link>
         </div>
         <div className="flex flex-col justify-between items-center h-full pb-6   px-6  w-full  space-y-32 ">
           <Link
             href={"/dashboard/errores"}
             
-            className={`focus:outline-none text-left  text-white flex justify-between items-center w-full py-5 space-x-14 ${
-                pathname === "/dashboard/errores" ? "text-indigo-400" : "active"
-              }`}
+            className={"focus:outline-none text-left  text-white flex justify-between items-center w-full py-5 space-x-14"}
           >
-            <p className="text-sm leading-5  uppercase">Errores</p>
+            <p className={`text-sm leading-5 uppercase ${
+                isPathActive("/dashboard/errores") ? "text-indigo-400" : "active"
+              }`}>Errores</p>
           </Link>
 
           <div className=" flex justify-between items-center w-full">
