@@ -20,9 +20,9 @@ export default function SideBar() {
      
       <div
         id="Main"
-        class="xl:rounded-r transform  xl:translate-x-0  ease-in-out transition duration-500 flex justify-start items-start h-full  w-full sm:w-64 bg-gray-900 flex-col"
+        className="xl:rounded-r transform  xl:translate-x-0  ease-in-out transition duration-500 flex justify-start items-start h-full  w-full sm:w-64 bg-gray-900 flex-col"
       >
-        <div class="hidden xl:flex justify-start p-6 items-center space-x-3">
+        <div className="hidden xl:flex justify-start p-6 items-center space-x-3">
           <svg
             width="34"
             height="34"
@@ -35,56 +35,56 @@ export default function SideBar() {
               fill="white"
             />
           </svg>
-          <p class="text-2xl leading-6 text-white">Qualiti</p>
+          <p className="text-2xl leading-6 text-white">Qualiti</p>
         </div>
 
-        <div class="flex flex-col justify-start items-center   px-6 border-b border-gray-600 w-full  ">
+        <div className="flex flex-col justify-start items-center   px-6 border-b border-gray-600 w-full  ">
           <Link
             href={"/dashboard/proyectos"}
             onClick={() => toggleMenu1()}
-            class={`focus:outline-none text-left  text-white flex justify-between items-center w-full py-5 space-x-14 ${
+            className={`focus:outline-none text-left  text-white flex justify-between items-center w-full py-5 space-x-14 ${
                 pathname === "/dashboard/proyectos" ? "text-indigo-400" : "active"
               }`}
           >
-            <p class="text-sm leading-5  uppercase">Proyectos</p>
+            <p className="text-sm leading-5  uppercase">Proyectos</p>
           </Link>
         </div>
-        <div class="flex flex-col justify-start items-center   px-6 border-b border-gray-600 w-full  ">
+        <div className="flex flex-col justify-start items-center   px-6 border-b border-gray-600 w-full  ">
           <Link
             href={"/dashboard/pruebas"}
-            onclick="showMenu2(true)"
-            class={`focus:outline-none text-left  text-white flex justify-between items-center w-full py-5 space-x-14 ${
+            
+            className={`focus:outline-none text-left  text-white flex justify-between items-center w-full py-5 space-x-14 ${
                 pathname === "/dashboard/pruebas" ? "text-indigo-400" : "active"
               }`}
           >
-            <p class="text-sm leading-5 uppercase">Pruebas</p>
+            <p className="text-sm leading-5 uppercase">Pruebas</p>
           </Link>
         </div>
-        <div class="flex flex-col justify-between items-center h-full pb-6   px-6  w-full  space-y-32 ">
+        <div className="flex flex-col justify-between items-center h-full pb-6   px-6  w-full  space-y-32 ">
           <Link
             href={"/dashboard/errores"}
-            onclick="showMenu3(true)"
-            class={`focus:outline-none text-left  text-white flex justify-between items-center w-full py-5 space-x-14 ${
+            
+            className={`focus:outline-none text-left  text-white flex justify-between items-center w-full py-5 space-x-14 ${
                 pathname === "/dashboard/errores" ? "text-indigo-400" : "active"
               }`}
           >
-            <p class="text-sm leading-5  uppercase">Errores</p>
+            <p className="text-sm leading-5  uppercase">Errores</p>
           </Link>
 
-          <div class=" flex justify-between items-center w-full">
-            <div class="flex justify-center items-center  space-x-2">
+          <div className=" flex justify-between items-center w-full">
+            <div className="flex justify-center items-center  space-x-2">
               <div>
                 <img
-                  class="rounded-full"
+                  className="rounded-full"
                   src="https://i.ibb.co/L1LQtBm/Ellipse-1.png"
                   alt="avatar"
                 />
               </div>
-              <div class="flex justify-start flex-col items-start">
-                <p class="cursor-pointer text-sm leading-5 text-white">
+              <div className="flex justify-start flex-col items-start">
+                <p className="cursor-pointer text-sm leading-5 text-white">
                   {data?.user?.fullname}
                 </p>
-                <p class="cursor-pointer text-xs leading-3 text-gray-300">
+                <p className="cursor-pointer text-xs leading-3 text-gray-300">
                   {data?.user?.email}
                 </p>
               </div>
