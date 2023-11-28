@@ -19,6 +19,10 @@ const ProjectForm = () => {
       const response = await Axios.get(`/api/user/${email}`);
 
       const teamMembers = [...project.teamMembers];
+
+      console.log(teamMembers)
+
+      console.log(teamMembers)
       if (response.statusText === "OK") {
         teamMembers[index].isValidUser = true;
         teamMembers[index].errorMessage = "";
@@ -30,6 +34,7 @@ const ProjectForm = () => {
     } catch (error) {
       console.error("Error al verificar el usuario:", error);
       const teamMembers = [...project.teamMembers];
+      teamMembers[index].isValidUser = false;
       teamMembers[index].errorMessage = "Error al verificar el usuario";
       setProject({ ...project, teamMembers });
     }
@@ -128,18 +133,20 @@ const ProjectForm = () => {
           {project.teamMembers.map((member, index) => (
             <div key={index} className="flex space-x-2 mb-2">
               <input
-      type="text"
-      name="user"
-      placeholder="Email del Usuario"
-      value={member.user}
-      onChange={(e) => handleChange(e, index)}
-      className={`block w-full sm:text-sm rounded-md text-black ${
-        member.errorMessage ? "border-2 border-red-500" : "border border-gray-300"
-      }`}
-    />
-    {member.errorMessage && (
-      <p className="text-red-500 text-sm">{member.errorMessage}</p>
-    )}
+                type="text"
+                name="user"
+                placeholder="Email del Usuario"
+                value={member.user}
+                onChange={(e) => handleChange(e, index)}
+                className={`block w-full sm:text-sm rounded-md text-black ${
+                  member.errorMessage
+                    ? "border-2 border-red-500"
+                    : "border border-gray-300"
+                }`}
+              />
+              {member.errorMessage && (
+                <p className="text-red-500 text-sm">{member.errorMessage}</p>
+              )}
               <input
                 type="text"
                 name="role"
