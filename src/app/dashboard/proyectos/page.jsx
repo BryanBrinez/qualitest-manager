@@ -175,7 +175,7 @@ const ProjectForm = () => {
           </button>
         </div>
 
-        {/* Campos adicionales para miembros del equipo y casos de prueba */}
+        
 
         <button
           type="submit"
