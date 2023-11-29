@@ -1,8 +1,13 @@
 "use client";
 import { useState } from "react";
 import Axios from "axios";
+import { useSession } from "next-auth/react";
+import swal from "sweetalert";
+import { useRouter } from "next/navigation";
 
 const ProjectForm = () => {
+  const router = useRouter();
+  const { data } = useSession();
   const [project, setProject] = useState({
     name: "",
     description: "",
@@ -20,9 +25,9 @@ const ProjectForm = () => {
 
       const teamMembers = [...project.teamMembers];
 
-      console.log(teamMembers)
+      console.log(teamMembers);
 
-      console.log(teamMembers)
+      console.log(teamMembers);
       if (response.statusText === "OK") {
         teamMembers[index].isValidUser = true;
         teamMembers[index].errorMessage = "";
@@ -64,30 +69,61 @@ const ProjectForm = () => {
     setProject({ ...project, teamMembers });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    // Verificar si todos los teamMembers tienen isValidUser en true
-    const areAllUsersValid = project.teamMembers.every(member => member.isValidUser === true);
-  
-    if (!areAllUsersValid) {
-      console.log("Hay miembros del equipo con información de usuario inválida");
-      return; // Detener la función si hay usuarios inválidos
+
+    // Convertir las fechas a objetos Date para compararlas
+    const startDate = new Date(project.startDate);
+    const endDate = project.endDate ? new Date(project.endDate) : null;
+
+    // Verificar si endDate es anterior a startDate
+    if (endDate && endDate < startDate) {
+      setError("La fecha final no puede ser anterior a la fecha inicial");
+      return; // Detener la función si la fecha final es inválida
     }
-  
-    // Crear una copia limpia del objeto project para la API
-    const cleanProject = {
+
+    // todos isValidUser = true
+    const areAllUsersValid = project.teamMembers.every(
+      (member) => member.isValidUser === true
+    );
+
+    if (!areAllUsersValid) {
+      setError("Hay miembros del equipo con información de usuario inválida");
+      return;
+    }
+
+    // Agregar el usuario administrador al arreglo de teamMembers
+    const updatedTeamMembers = [
+      ...project.teamMembers.map(({ user, role }) => ({ user, role })), // Limpiar campos no necesarios
+      { user: data?.user?.email, role: "Administrador" },
+    ];
+
+    // Crear una versión final del proyecto para enviar
+    const finalProject = {
       ...project,
-      teamMembers: project.teamMembers.map(({ user, role }) => ({ user, role }))
-      // Elimina los campos no necesarios de cada miembro del equipo
+      teamMembers: updatedTeamMembers,
     };
-  
-    // Aquí va tu lógica para enviar cleanProject a la API
-    console.log("Enviando proyecto limpio: ", cleanProject);
+
+    // va el post
+    try {
+      const res = await Axios.post("/api/project", finalProject);
+
+      swal({
+        title: "Se ha creado su proyecto",
+        icon: "success",
+      }).then((value) => {
+        // Redirigir al usuario después de que presione "Aceptar" en la alerta
+        router.push("/dashboard/proyectos");
+      });
+      
+    } catch (error) {
+      setError(error.response?.data.message);
+    }
   };
 
   return (
     <div className="container mx-auto p-4 text-white">
+      {error && <div className="bg-red-500 text-white p-2 mb-2">{error}</div>}
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="name" className="block text-sm font-medium ">
@@ -112,7 +148,9 @@ const ProjectForm = () => {
           <textarea
             name="description"
             id="description"
-            onChange={(e) => setProject({ ...project, description: e.target.value })}
+            onChange={(e) =>
+              setProject({ ...project, description: e.target.value })
+            }
             required
             className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md dark:text-black"
           ></textarea>
@@ -126,7 +164,10 @@ const ProjectForm = () => {
             type="date"
             name="startDate"
             id="startDate"
-            onChange={(e) => setProject({ ...project, startDate: e.target.value })}
+            onChange={(e) => {
+              setProject({ ...project, startDate: e.target.value });
+              setError(null); // Resetear el estado de error
+            }}
             required
             className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md dark:text-black"
           />
@@ -140,7 +181,9 @@ const ProjectForm = () => {
             type="date"
             name="endDate"
             id="endDate"
-            onChange={(e) => setProject({ ...project, endDate: e.target.value })}
+            onChange={(e) =>
+              setProject({ ...project, endDate: e.target.value })
+            }
             className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md dark:text-black"
           />
         </div>
@@ -190,8 +233,6 @@ const ProjectForm = () => {
             Agregar miembro
           </button>
         </div>
-
-        
 
         <button
           type="submit"

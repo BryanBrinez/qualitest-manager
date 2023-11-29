@@ -10,7 +10,7 @@ export async function GET(request, {params}) {
     const filter = { email: email };
     
 
-    const user = await User.findOne(filter) // La opción '+password' es para incluir el campo password si es necesario.
+    const user = await User.findOne(filter) 
     if (!user) {
       return new Response(JSON.stringify({ message: "User not found" }), { status: 404 });
     }

@@ -20,7 +20,7 @@ const ProjectSchema = new Schema(
       type: Date,
     },
     teamMembers: [{
-      user: { type: Schema.Types.ObjectId, ref: 'User' },
+      user: { type: String },
       role: { type: String, required: true }
     }],
     test: [{
