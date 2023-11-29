@@ -66,8 +66,24 @@ const ProjectForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Enviar datos al backend
-    console.log(project);
+  
+    // Verificar si todos los teamMembers tienen isValidUser en true
+    const areAllUsersValid = project.teamMembers.every(member => member.isValidUser === true);
+  
+    if (!areAllUsersValid) {
+      console.log("Hay miembros del equipo con información de usuario inválida");
+      return; // Detener la función si hay usuarios inválidos
+    }
+  
+    // Crear una copia limpia del objeto project para la API
+    const cleanProject = {
+      ...project,
+      teamMembers: project.teamMembers.map(({ user, role }) => ({ user, role }))
+      // Elimina los campos no necesarios de cada miembro del equipo
+    };
+  
+    // Aquí va tu lógica para enviar cleanProject a la API
+    console.log("Enviando proyecto limpio: ", cleanProject);
   };
 
   return (
