@@ -1,16 +1,16 @@
 "use client";
-import ProjectCard from "@/components/ProjectCard";
-import Link from "next/link";
-import React from "react";
-import Axios from "axios";
+import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
-import { useEffect, useState } from "react";
+import Link from "next/link";
+import Axios from "axios";
+import { Skeleton } from "@mui/material";
+import ProjectCard from "@/components/ProjectCard";
 
-export default function page() {
+export default function Page() {
   const { data } = useSession();
   const [dataProjects, setDataProject] = useState([]);
+  const [isLoading, setLoading] = useState(true);
 
-  console.log(data?.user?.email);
   const dataProject = async () => {
     try {
       const response = await Axios.get(
@@ -18,16 +18,20 @@ export default function page() {
       );
       setDataProject(response.data);
     } catch (error) {
-      console.error("No encontro al usuario que esta iniciado", error);
+      console.error("No encontró al usuario que está iniciado", error);
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    if (data?.user?.email) {
-      dataProject();
-      console.log(" hizo 1")
-    }
-    
+    const fetchData = async () => {
+      if (data?.user?.email) {
+        await dataProject();
+      }
+    };
+
+    fetchData();
   }, [data?.user?.email]);
 
   return (
@@ -40,14 +44,35 @@ export default function page() {
       </Link>
 
       <div className="p-2">
-        {dataProjects.map((project, index) => (
-          <div key={index} className="mb-2">
-            {" "}
-            <Link href={`proyectos/${project._id}`}>
-            <ProjectCard projectData={project} emailUser={data?.user?.email} />
-            </Link>
+        {isLoading ? (
+          // Muestra el esqueleto mientras se cargan los datos
+
+          <div className="p-2">
+            {[...Array(3).keys()].map((index) => (
+              <div key={index} className="mb-2">
+                <Skeleton
+                  sx={{ bgcolor: "grey.900" }}
+                  variant="rounded"
+                  animation="wave"
+                  width={980}
+                  height={190}
+                />
+              </div>
+            ))}
           </div>
-        ))}
+        ) : (
+          // Mapea sobre cada proyecto y renderiza la tarjeta correspondiente
+          dataProjects.map((project, index) => (
+            <div key={index} className="mb-2">
+              <Link href={`proyectos/${project._id}`}>
+                <ProjectCard
+                  projectData={project}
+                  emailUser={data?.user?.email}
+                />
+              </Link>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );

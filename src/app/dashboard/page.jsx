@@ -1,4 +1,4 @@
-export default function page() {
+export default function Page() {
   return (
     <div>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa magni

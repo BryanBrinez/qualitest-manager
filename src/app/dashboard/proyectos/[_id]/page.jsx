@@ -3,7 +3,7 @@ import React from "react";
 import Axios from "axios";
 import { useEffect, useState } from "react";
 
-export default function page({ params }) {
+export default function Page({ params }) {
   const { _id } = params;
   const [dataProjects, setDataProject] = useState([]);
 
