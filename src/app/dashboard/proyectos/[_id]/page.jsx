@@ -29,7 +29,6 @@ export default function Page({ params }) {
     dataProject();
 
     // Verifica si el usuario es administrador cuando 'dataProjects' cambia.
-    
   }, []);
 
   return (
@@ -37,7 +36,9 @@ export default function Page({ params }) {
       <div className="pb-2">
         <div className="border border-gray-800 rounded p-4 space-y-4 bg-neutral-700">
           <div className="flex justify-between items-center">
-            <div className="text-white font-bold text-lg">Prueba proyecto</div>
+            <div className="text-white font-bold text-lg">
+              {dataProjects.name}
+            </div>
 
             {adminPermission && (
               <Link
@@ -49,23 +50,23 @@ export default function Page({ params }) {
             )}
           </div>
 
-          <p className="text-gray-300">Descripcion prueba</p>
+          <p className="text-gray-300">{dataProjects.description}</p>
           <div className="flex justify-between">
             <span className="bg-gray-600 text-white px-3 py-1 rounded-full text-sm">
-              Inicio: 29/10/2023
+              {dataProjects.startDate}
             </span>
             <span className="bg-gray-600 text-white px-3 py-1 rounded-full text-sm">
-              Fin: 22/11/2023
+              {dataProjects.endDate}
             </span>
           </div>
           <div className="space-y-2">
             <h2 className="text-lg">Equipo de trabajo.</h2>
-            <div className=" text-white px-3 py-1 rounded-full text-sm">
-              gustavo@gmail.com - tester
-            </div>
-            <div className=" text-white px-3 py-1 rounded-full text-sm">
-              bryan@hotmail.com - Administrador
-            </div>
+
+            {dataProjects.teamMembers?.map((member, index) => (
+              <div key={index} className=" text-white px-3 py-1 rounded-full text-sm">
+                {member.user} - {member.role}
+              </div>
+            ))}
           </div>
         </div>
       </div>
