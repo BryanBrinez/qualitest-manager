@@ -5,7 +5,12 @@ import { useSession } from "next-auth/react";
 import swal from "sweetalert";
 import { useRouter } from "next/navigation";
 
-const ProjectForm = () => {
+import React from 'react'
+
+
+
+
+export default function page() {
   const router = useRouter();
   const { data } = useSession();
   const [project, setProject] = useState({
@@ -245,4 +250,4 @@ const ProjectForm = () => {
   );
 };
 
-export default ProjectForm;
+
