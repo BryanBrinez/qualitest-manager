@@ -22,13 +22,14 @@ export default function Page() {
   const checkUserExistence = async (email, index) => {
     try {
       const response = await Axios.get(`/api/user/${email}`);
+      console.log(response)
 
       console.log(response.data)
 
       const teamMembers = [...project.teamMembers];
 
       console.log(teamMembers);
-      if (response.statusText === "OK") {
+      if (response.status === 200) {
         teamMembers[index].isValidUser = true;
         teamMembers[index].errorMessage = "";
       } else {
