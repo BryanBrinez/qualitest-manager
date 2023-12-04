@@ -78,7 +78,7 @@ export default function Page({ params }) {
       const teamMembers = [...project.teamMembers];
 
       
-      if (response.statusText === "OK") {
+      if (response.status === 200) {
         teamMembers[index].isValidUser = true;
         teamMembers[index].errorMessage = "";
       } else {
