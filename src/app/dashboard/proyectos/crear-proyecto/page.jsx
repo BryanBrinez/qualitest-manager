@@ -23,9 +23,9 @@ export default function Page() {
     try {
       const response = await Axios.get(`/api/user/${email}`);
 
-      const teamMembers = [...project.teamMembers];
+      console.log(response.data)
 
-      console.log(teamMembers);
+      const teamMembers = [...project.teamMembers];
 
       console.log(teamMembers);
       if (response.statusText === "OK") {
