@@ -5,12 +5,7 @@ import { useSession } from "next-auth/react";
 import swal from "sweetalert";
 import { useRouter } from "next/navigation";
 
-import React from 'react'
-
-
-
-
-export default function page() {
+export default function Page() {
   const router = useRouter();
   const { data } = useSession();
   const [project, setProject] = useState({
