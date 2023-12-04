@@ -1,5 +1,6 @@
 import { connectDB } from "@/libs/mongodb";
 import TestCase from "@/models/testcase";
+import Project from "@/models/project";
 
 export async function POST(request) {
   const testData = await request.json();
@@ -12,6 +13,14 @@ export async function POST(request) {
 
     // Guardar el caso de prueba en la base de datos
     const savedTestCase = await newTestCase.save();
+
+    await Project.findByIdAndUpdate(
+      testData.project,
+      { $push: { test: savedTestCase._id } },
+      { new: true }
+    );
+
+    
 
     return new Response(JSON.stringify(savedTestCase), { status: 201 });
   } catch (error) {

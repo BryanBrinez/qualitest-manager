@@ -29,8 +29,8 @@ const TestCaseSchema = new Schema(
       enum: ["Passed", "Failed", "Blocked"],
     },
     project: { type: Schema.Types.ObjectId, ref: "Project" },
-    createdBy: { type: Schema.Types.ObjectId, ref: "User" },
-    assignedTo: { type: Schema.Types.ObjectId, ref: "User" },
+    createdBy: { type: String },
+    assignedTo: { type: String },
 
     stage: {
       type: String,
