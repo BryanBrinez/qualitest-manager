@@ -9,6 +9,7 @@ export default function Page({ params }) {
   const [dataProjects, setDataProject] = useState([]);
   const { data } = useSession();
   const [adminPermission, setAdminPermission] = useState(false);
+  const [testerPermission, setTesterPermission] = useState(false);
   const [tests, setTests] = useState([]);
 
   const dataProject = async () => {
@@ -28,6 +29,14 @@ export default function Page({ params }) {
           processedTestIds.add(testId);
         }
       });
+
+      const isUserInTeam = response.data.teamMembers.some(
+        (member) =>
+          member.user === data?.user?.email &&
+          (member.role === "Administrador" || member.role === "Tester")
+      );
+
+      setTesterPermission(isUserInTeam)
 
       setAdminPermission(isAdmin);
     } catch (error) {
@@ -105,7 +114,7 @@ export default function Page({ params }) {
           <div className="flex justify-between items-center">
             <h2 className="text-white font-bold text-lg p-4">Pruebasss</h2>
 
-            {adminPermission && (
+            {testerPermission && (
               <Link
                 href={`crear-prueba/${_id}`}
                 className="text-sm bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
