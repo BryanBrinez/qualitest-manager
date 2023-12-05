@@ -1,9 +1,60 @@
-import React from "react";
+"use client";
+import Axios from "axios";
+import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
+import { Skeleton } from "@mui/material";
+import ErrorCard from "@/components/ErrorCard";
+import Link from "next/link";
 
 export default function Page() {
+  const { data } = useSession();
+  const [pruebas, setPrueba] = useState([])
+  const [isLoading, setLoading] = useState(true);
+
+  const dataError = async () => {
+    try {
+      const res = await Axios.get(`/api/testcase/email/${data?.user.email}`);
+      setPrueba(res.data)
+    } catch (error) {
+      console.log("error" + error);
+    }finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    dataError();
+  }, []);
+
   return (
-    <div className="flex flex-col">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum voluptatum numquam eligendi nemo ut repellat earum ipsum libero ab temporibus inventore quisquam architecto quaerat eos ex pariatur, veniam necessitatibus dolorem!
+    <div className="p-2">
+      {isLoading ? (
+        // Muestra el esqueleto mientras se cargan los datos
+
+        <div className="p-2">
+          {[...Array(3).keys()].map((index) => (
+            <div key={index} className="mb-2">
+              <Skeleton
+                sx={{ bgcolor: "grey.900" }}
+                variant="rounded"
+                animation="wave"
+                width={980}
+                height={190}
+              />
+            </div>
+          ))}
+        </div>
+      ) : (
+        // Mapea sobre cada proyecto y renderiza la tarjeta correspondiente
+        pruebas.map((prueba, index) => (
+          <div key={index} className="mb-2">
+            <Link href={`proyectos/`}>
+   
+              <ErrorCard errorData={prueba} />
+            </Link>
+          </div>
+        ))
+      )}
     </div>
   );
 }
