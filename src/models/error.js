@@ -17,8 +17,8 @@ const ErrorSchema = new Schema(
       default: 'New',
     },
     testCase: { type: Schema.Types.ObjectId, ref: 'TestCase' },
-    reportedBy: { type: Schema.Types.ObjectId, ref: 'User' },
-    assignedTo: { type: Schema.Types.ObjectId, ref: 'User' },
+    reportedBy: { type: String },
+    assignedTo: { type:String},
     comments: [{
       text: String,
       createdBy: { type: Schema.Types.ObjectId, ref: 'User' },

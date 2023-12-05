@@ -158,8 +158,51 @@ export default function Page({ params }) {
         </div>
       </div>
       <div className="pb-2">
-        <div className="border border-gray-800 rounded p-4 space-y-4 bg-neutral-700">
-          errores
+        <div className="border border-gray-800 rounded  pb-4 bg-neutral-700">
+          <div className="flex justify-between items-center">
+            <h2 className="text-white font-bold text-lg p-4">Errores</h2>
+
+            {testerPermission && (
+              <Link
+                href={`crear-error/${_id}`}
+                className="text-sm bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
+              >
+                Crear Error
+              </Link>
+            )}
+          </div>
+          {tests?.map((test, index) => (
+            <div
+              key={index}
+              className="border border-gray-500 rounded p-4 bg-neutral-700"
+            >
+              <div className="flex justify-between items-center">
+                <h2 className=" text-white px-3 py-1 rounded-full text-sm">
+                  {test.title}
+                </h2>
+
+                {adminPermission && (
+                  <Link
+                    href={`${_id}/crear-prueba`}
+                    className="text-sm bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
+                  >
+                    Editar
+                  </Link>
+                )}
+              </div>
+              <div>
+                <p>{test.description}</p>
+                <p>{test.steps}</p>
+                <p>{test.status}</p>
+                <p>{test.assignedTo}</p>
+                <p>{test.stage}</p>
+                <p>{test.priority}</p>
+                <p>{test.createdBy}</p>
+                
+
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
