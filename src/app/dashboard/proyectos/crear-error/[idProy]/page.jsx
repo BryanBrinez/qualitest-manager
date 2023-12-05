@@ -91,7 +91,7 @@ export default function ErrorForm({ params }) {
       const res = await Axios.post("/api/error", errorDetails);
 
       swal({
-        title: "Se ha creado su Prueba",
+        title: "Se ha creado su Error",
         icon: "success",
       }).then((value) => {
         // Redirigir al usuario después de que presione "Aceptar" en la alerta

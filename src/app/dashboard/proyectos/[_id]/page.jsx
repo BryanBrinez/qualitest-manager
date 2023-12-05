@@ -11,6 +11,7 @@ export default function Page({ params }) {
   const [adminPermission, setAdminPermission] = useState(false);
   const [testerPermission, setTesterPermission] = useState(false);
   const [tests, setTests] = useState([]);
+  const [errors, setErrors] = useState([]);
 
   const dataProject = async () => {
     try {
@@ -59,9 +60,19 @@ export default function Page({ params }) {
     }
   };
 
+  const dataError = async () => {
+    try {
+      const response = await Axios.get(`/api/error/project/${_id}`);
+      setErrors(response.data)
+      
+    } catch (error) {
+      console.error("hubo un error", error);
+    }
+  };
+
   useEffect(() => {
     dataProject();
-    //dataTests();
+    dataError()
 
     // Verifica si el usuario es administrador cuando 'dataProjects' cambia.
   }, []);
@@ -171,14 +182,14 @@ export default function Page({ params }) {
               </Link>
             )}
           </div>
-          {tests?.map((test, index) => (
+          {errors?.map((error, index) => (
             <div
               key={index}
               className="border border-gray-500 rounded p-4 bg-neutral-700"
             >
               <div className="flex justify-between items-center">
                 <h2 className=" text-white px-3 py-1 rounded-full text-sm">
-                  {test.title}
+                  {error.description}
                 </h2>
 
                 {adminPermission && (
@@ -191,13 +202,14 @@ export default function Page({ params }) {
                 )}
               </div>
               <div>
-                <p>{test.description}</p>
-                <p>{test.steps}</p>
-                <p>{test.status}</p>
-                <p>{test.assignedTo}</p>
-                <p>{test.stage}</p>
-                <p>{test.priority}</p>
-                <p>{test.createdBy}</p>
+                <p>{error.description}</p>
+                
+                <p>{error.status}</p>
+                <p>{error.assignedTo}</p>
+                <p>{error.reportedby}</p>
+                <p>{error.severity}</p>
+                <p>{error.testCase.title}</p>
+                <p>{error.updatedAt}</p>
                 
 
               </div>
