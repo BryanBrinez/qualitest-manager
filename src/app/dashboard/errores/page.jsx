@@ -48,7 +48,7 @@ export default function Page() {
         // Mapea sobre cada proyecto y renderiza la tarjeta correspondiente
         errors.map((error, index) => (
           <div key={index} className="mb-2">
-            <Link href={`proyectos/`}>
+            <Link href={`errores/${error._id}`}>
    
               <ErrorCard errorData={error} />
             </Link>

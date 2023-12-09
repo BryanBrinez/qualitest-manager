@@ -22,9 +22,9 @@ export default function Page() {
   const checkUserExistence = async (email, index) => {
     try {
       const response = await Axios.get(`/api/user/${email}`);
-      console.log(response)
+      console.log(response);
 
-      console.log(response.data)
+      console.log(response.data);
 
       const teamMembers = [...project.teamMembers];
 
@@ -116,7 +116,6 @@ export default function Page() {
         // Redirigir al usuario después de que presione "Aceptar" en la alerta
         router.push("/dashboard/proyectos");
       });
-      
     } catch (error) {
       setError(error.response?.data.message);
     }
@@ -207,6 +206,10 @@ export default function Page() {
               {member.errorMessage && (
                 <p className="text-red-500 text-sm">{member.errorMessage}</p>
               )}
+
+              
+
+
               <input
                 type="text"
                 name="role"
@@ -244,6 +247,4 @@ export default function Page() {
       </form>
     </div>
   );
-};
-
-
+}

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Skeleton } from "@mui/material";
 import ErrorCard from "@/components/ErrorCard";
 import Link from "next/link";
+import PruebaCard from "@/components/PruebaCard";
 
 export default function Page() {
   const { data } = useSession();
@@ -47,10 +48,11 @@ export default function Page() {
       ) : (
         // Mapea sobre cada proyecto y renderiza la tarjeta correspondiente
         pruebas.map((prueba, index) => (
+          
           <div key={index} className="mb-2">
-            <Link href={`proyectos/`}>
-   
-              <ErrorCard errorData={prueba} />
+            <Link href={`pruebas/${prueba._id}`}>
+            
+              <PruebaCard pruebaData={prueba} />
             </Link>
           </div>
         ))
