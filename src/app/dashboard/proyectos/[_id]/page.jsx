@@ -86,7 +86,7 @@ export default function Page({ params }) {
               {dataProjects.name}
             </h2>
 
-            {testerPermission && (
+            {adminPermission && (
               <Link
                 href={`edit/${_id}`}
                 className="text-sm bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
@@ -144,7 +144,7 @@ export default function Page({ params }) {
                   {test.title}
                 </h2>
 
-                {adminPermission && (
+                {testerPermission && (
                   <Link
                     href={`/dashboard/pruebas/edit/${test._id}`}
                     className="text-sm bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
