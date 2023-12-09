@@ -192,7 +192,7 @@ export default function Page({ params }) {
   useEffect(() => {
     dataProject();
     
-  }, []);
+  }, [data?.user.email]);
 
   return (
     <div>
@@ -295,14 +295,18 @@ export default function Page({ params }) {
                       {member.errorMessage}
                     </p>
                   )}
-                  <input
-                    type="text"
-                    name="role"
-                    placeholder="Rol"
-                    value={member.role}
-                    onChange={(e) => handleChange(e, index)}
-                    className="block w-full sm:text-sm border-gray-300 rounded-md text-black"
-                  />
+                  <select
+                id="role"
+                name="role"
+                value={member.role}
+                onChange={(e) => handleChange(e, index)}
+                required
+                className="block w-full pl-3 pr-10 text-black py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+              >
+                <option value="">Seleccione la severidad</option>
+                <option value="Administrador">Administrador</option>
+                <option value="Tester">Tester</option>
+              </select>
                   {project.teamMembers.length > 1 && (
                     <button
                       type="button"

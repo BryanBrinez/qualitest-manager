@@ -25,7 +25,7 @@ export default function Page() {
 
   useEffect(() => {
     dataError();
-  }, []);
+  }, [data?.user.email]);
 
   return (
     <div className="p-2">

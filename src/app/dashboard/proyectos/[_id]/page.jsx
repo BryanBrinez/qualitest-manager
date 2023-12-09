@@ -75,7 +75,7 @@ export default function Page({ params }) {
     dataError()
 
     // Verifica si el usuario es administrador cuando 'dataProjects' cambia.
-  }, []);
+  }, [data?.user.email]);
 
   return (
     <div className="gap-2 text-white">

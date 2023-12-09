@@ -86,7 +86,7 @@ export default function TestCaseForm({ params }) {
   useEffect(() => {
     dataMembers();
     //setPermission();
-  }, []);
+  }, [data?.user.email]);
 
   return (
     <div className="container mx-auto p-8 ">
